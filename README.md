@@ -13,6 +13,7 @@ Test B: Functional Testing
 Test C: Performance testing
 Test D: Regression testing
 
+с 1 до 4 одинаково все
 
 АЛИНА ЗАГРУЗИ СВОЙ ВАРИАНТ И ДАТАСЕТЫ, У ВСЕХ РАЗНЫЕ ДАТАСЕТЫ
 
