@@ -1,5 +1,7 @@
 # capstone
 
+АЛИНА ЗАГРУЗИ СВОЙ ВАРИАНТ И ДАТАСЕТЫ, У ВСЕХ РАЗНЫЕ ДАТАСЕТЫ
+
 1. 
 SRS mean 46.1
 Standard Error = 5.83
@@ -20,6 +22,19 @@ After 10000 iterations:
   Cost = 3267   Max|theta| = 3328
 
 3.
+
+5.
+Accuracy: 0.744
+F1 Score (Class 0): 0.699
+F1 Score (Class 1): 0.791
+F1 Score (Class 2): 0.765
+
+6.
+1)User Management
+2)Course Management
+3)System Features
+4)Assessment and Grading
+5)Security Requirements
 
 7.
 Middle Income Level
@@ -52,3 +67,12 @@ private String strDepartmentName; → Hungarian
 private String strCEO; → Acronym
 private String strCTO; → Acronym
 public void AddDepartment(Department department) → Pascal
+
+
+9. Дай варианты ответов 
+- **A:** Integration Test  
+- **B:** Top-down Testing  
+- **C:** Performance Testing  
+- **D:** Stability Testing
+
+10. Дай варианты ответов !!!
