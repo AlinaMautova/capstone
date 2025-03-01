@@ -1,4 +1,13 @@
 # capstone
+9. Варианты ответов
+Bottom-Up testing
+Stability testing
+Performance testing
+Regression testing
+Top-Down testing
+Integration testing
+Functional Testing
+
 
 АЛИНА ЗАГРУЗИ СВОЙ ВАРИАНТ И ДАТАСЕТЫ, У ВСЕХ РАЗНЫЕ ДАТАСЕТЫ
 
