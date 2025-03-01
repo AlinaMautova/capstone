@@ -8,6 +8,11 @@ Top-Down testing
 Integration testing
 Functional Testing
 
+Test A: Integration testing
+Test B: Functional Testing
+Test C: Performance testing
+Test D: Regression testing
+
 
 АЛИНА ЗАГРУЗИ СВОЙ ВАРИАНТ И ДАТАСЕТЫ, У ВСЕХ РАЗНЫЕ ДАТАСЕТЫ
 
