@@ -88,3 +88,4 @@ public void AddDepartment(Department department) → Pascal
 - **D:** Stability Testing
 
 10. Дай варианты ответов !!!
+сам сделал вроде 10ый вопрос, нзаспамьте алине ридми файл и остальные файлы чтобы ее датасеты получить!

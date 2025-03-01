@@ -2,7 +2,8 @@ import pandas as pd
 import numpy as np
 import math
 
-df = pd.read_csv("Question2_Final_CP 17.csv")
+# 1) Read CSV file
+df = pd.read_csv("./datasets/Question2_Final_CP 17.csv")
 
 X_features = df[['X1', 'X2', 'X1^2', 'X1^3', 'X2^2', 'X2^3']].values 
 y = df[['Y']].values 
