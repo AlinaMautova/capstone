@@ -11,6 +11,15 @@ Standard Error = 5.71
 d_squared = 0.96
 Neff = 16.67
 
+
+
+6.
+1)User Management
+2)Course Management
+3)System Features
+4)Assessment and Grading
+5)Security Requirements
+
 7.
 Middle Income Level
 n: 750
