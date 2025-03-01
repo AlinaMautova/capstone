@@ -15,8 +15,6 @@ Test D: Regression testing
 
 с 1 до 4 вопросов одинаково все
 
-ДАТАСЕТЫ ОДИНАКОВВЫЕ, БЕРИ ЭТИ ОТВЕТЫ
-
 1. 
 SRS mean 46.1
 Standard Error = 5.83
