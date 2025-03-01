@@ -60,8 +60,10 @@ private String strCTO; → Acronym
 public void AddDepartment(Department department) → Pascal
 
 
-9.
+9. Дай варианты ответов 
 - **A:** Integration Test  
 - **B:** Top-down Testing  
 - **C:** Performance Testing  
 - **D:** Stability Testing
+
+10. Дай варианты ответов !!!
