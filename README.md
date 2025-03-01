@@ -12,6 +12,11 @@ d_squared = 0.96
 Neff = 16.67
 
 
+5.
+Accuracy: 0.744
+F1 Score (Class 0): 0.699
+F1 Score (Class 1): 0.791
+F1 Score (Class 2): 0.765
 
 6.
 1)User Management
