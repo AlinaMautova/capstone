@@ -34,6 +34,13 @@ After 10000 iterations, alpha=2.0, lambda=5.0:
   Cost function (2 decimals)   = 0.27
   Max |theta| (2 decimals)     = 2.68
 
+4.
+a5 = [1, 1]
+a4.max() = 2956
+a3.max() = 934
+a2.min() = 72
+a1.min() = 3
+Predict image of dog
 
 5.
 Accuracy: 0.744

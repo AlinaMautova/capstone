@@ -1,67 +1,89 @@
 import numpy as np
-import pandas as pd
-from scipy.special import expit  # Sigmoid function
 
-def normalize(X):
-    return (X - np.mean(X, axis=0)) / np.std(X, axis=0)
+def leaky_relu(x, alpha=0.01):
+    return np.where(x > 0, x, alpha * x)
 
-def sigmoid(z):
-    return expit(z)
+def leaky_relu_derivative(x, alpha=0.01):
+    return np.where(x > 0, 1, alpha)
 
-def compute_cost(X, y, theta, reg_lambda):
-    m = len(y)
-    h = sigmoid(X @ theta)
-    cost = (-1/m) * (y.T @ np.log(h) + (1 - y).T @ np.log(1 - h))
-    reg_term = (reg_lambda / (2 * m)) * np.sum(theta[1:] ** 2)
-    return cost + reg_term
+def sigmoid(x):
+    return 1 / (1 + np.exp(-x))
 
-def gradient_descent(X, y, theta, alpha, reg_lambda, iterations):
-    m = len(y)
-    for _ in range(iterations):
-        h = sigmoid(X @ theta)
-        gradient = (1/m) * (X.T @ (h - y)) + (reg_lambda/m) * np.vstack(([0], theta[1:]))
-        theta -= alpha * gradient
-    return theta
+def sigmoid_derivative(x):
+    return x * (1 - x)
 
-# Load dataset
-df = pd.read_csv('Question3_Final_CP[1].csv')  # Ensure correct filename
-X = df.iloc[:, :-1].values  # Input features
-y = df.iloc[:, -1].values.reshape(-1, 1)  # Output feature
+X = np.array([[0.15, 0.3, 0.45, 0.6], 
+              [0.2,  0.4, 0.6,  0.8]]) 
 
-# Normalize input features
-X = normalize(X)
-X = np.c_[np.ones(X.shape[0]), X]  # Add bias term
+y = np.array([[1], [0]])
 
-# Initialize theta
-theta_init = np.zeros((X.shape[1], 1))
+input_layer_size   = 4  
+hidden_layer1_size = 8  
+hidden_layer2_size = 6  
+hidden_layer3_size = 4  
+hidden_layer4_size = 3  
+output_layer_size  = 1  
 
-# Parameters to evaluate
-params = [
-    (100, 0.1, 0.1),
-    (1000, 0.2, 1),
-    (10000, 0.3, 10)
-]
+W1 = np.array([[0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8],
+               [0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6],
+               [1.7, 1.8, 1.9, 2.0, 2.1, 2.2, 2.3, 2.4],
+               [2.5, 2.6, 2.7, 2.8, 2.9, 3.0, 3.1, 3.2]])
+b1 = np.array([[0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]])
 
-results = {}
-for iterations, alpha, reg_lambda in params:
-    theta = gradient_descent(X, y, theta_init.copy(), alpha, reg_lambda, iterations)
-    cost = compute_cost(X, y, theta, reg_lambda)
-    max_theta = np.max(np.abs(theta))  # Ensure we correctly get max theta
+W2 = np.array([[0.2, 0.3, 0.4, 0.5, 0.6, 0.7],
+               [0.8, 0.9, 1.0, 1.1, 1.2, 1.3],
+               [1.4, 1.5, 1.6, 1.7, 1.8, 1.9],
+               [2.0, 2.1, 2.2, 2.3, 2.4, 2.5],
+               [2.6, 2.7, 2.8, 2.9, 3.0, 3.1],
+               [3.2, 3.3, 3.4, 3.5, 3.6, 3.7],
+               [3.8, 3.9, 4.0, 4.1, 4.2, 4.3],
+               [4.4, 4.5, 4.6, 4.7, 4.8, 4.9]])
+b2 = np.array([[0.1, 0.2, 0.3, 0.4, 0.5, 0.6]])
+
+W3 = np.array([[0.2, 0.3, 0.4, 0.5],
+               [0.6, 0.7, 0.8, 0.9],
+               [1.0, 1.1, 1.2, 1.3],
+               [1.4, 1.5, 1.6, 1.7],
+               [1.8, 1.9, 2.0, 2.1],
+               [2.2, 2.3, 2.4, 2.5]])
+b3 = np.array([[0.1, 0.2, 0.3, 0.4]])
+
+W4 = np.array([[0.2, 0.3, 0.4],
+               [0.5, 0.6, 0.7],
+               [0.8, 0.9, 1.0],
+               [1.1, 1.2, 1.3]])
+b4 = np.array([[0.1, 0.2, 0.3]])
+
+W5 = np.array([[0.2],
+               [0.3],
+               [0.4]])
+b5 = np.array([[0.1]])
+
+learning_rate = 0.1
+epochs = 10000
+
+for epoch in range(epochs):
+
+    z1 = X.dot(W1) + b1   
+    a1 = leaky_relu(z1)
+
+    z2 = a1.dot(W2) + b2      
+    a2 = leaky_relu(z2)
+
+    z3 = a2.dot(W3) + b3 
+    a3 = leaky_relu(z3)
+
+    z4 = a3.dot(W4) + b4
+    a4 = leaky_relu(z4)
+
+    z5 = a4.dot(W5) + b5
+    a5 = sigmoid(z5)
+
+    error = y - a5
     
-    results[iterations] = {
-        "cost_function": round(float(cost), 2),
-        "max_theta": round(float(max_theta), 2)
-    }
+    if epoch % 1000 == 0:
+        loss = np.mean(np.abs(error))
+        print(f"Epoch {epoch}, Loss: {loss}")
 
-# Predicting first 10 rows using final model
-final_theta = gradient_descent(X, y, theta_init.copy(), 0.3, 10, 10000)
-predictions = sigmoid(X @ final_theta)
-binary_predictions = (predictions >= 0.5).astype(int)
-num_ones_in_first_10 = int(np.sum(binary_predictions[:10]))  # Ensure integer output
-
-# Display results
-print("#Iterations | Cost Function | Max Theta")
-for key, value in results.items():
-    print(f"n={key} | {value['cost_function']} | {value['max_theta']}")
-
-print(f"Number of ones in first 10 rows of prediction: {num_ones_in_first_10}")
+y_pred = a5
+print("Final Predictions (a5):\n", y_pred)
