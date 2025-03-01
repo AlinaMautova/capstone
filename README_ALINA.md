@@ -6,13 +6,6 @@ F1 Score (Class 1): 0.791
 F1 Score (Class 2): 0.765
 
 
-6.
-1)User Management
-2)Course Management
-3)System Features
-4)Assessment and Grading
-5)Security Requirements
-
 7.
 Middle Income Level
 n: 750
