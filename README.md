@@ -11,6 +11,16 @@ Standard Error = 5.71
 d_squared = 0.96
 Neff = 16.67
 
+2.
+After 100 iterations:
+  Cost = 931888   Max|theta| = 2110
+After 1000 iterations:
+  Cost = 46135   Max|theta| = 3328
+After 10000 iterations:
+  Cost = 3267   Max|theta| = 3328
+
+3.
+
 7.
 Middle Income Level
 n: 750
