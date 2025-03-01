@@ -58,3 +58,10 @@ private String strDepartmentName; → Hungarian
 private String strCEO; → Acronym
 private String strCTO; → Acronym
 public void AddDepartment(Department department) → Pascal
+
+
+9.
+- **A:** Integration Test  
+- **B:** Top-down Testing  
+- **C:** Performance Testing  
+- **D:** Stability Testing
