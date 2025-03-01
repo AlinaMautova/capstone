@@ -22,6 +22,18 @@ After 10000 iterations:
   Cost = 3267   Max|theta| = 3328
 
 3.
+After 100 iterations, alpha=1.0, lambda=1.0:
+  Cost function (2 decimals)   = 0.17
+  Max |theta| (2 decimals)     = 4.02
+------------------------------------------------------
+After 1000 iterations, alpha=1.0, lambda=10.0:
+  Cost function (2 decimals)   = 0.33
+  Max |theta| (2 decimals)     = 2.02
+------------------------------------------------------
+After 10000 iterations, alpha=2.0, lambda=5.0:
+  Cost function (2 decimals)   = 0.27
+  Max |theta| (2 decimals)     = 2.68
+
 
 5.
 Accuracy: 0.744

@@ -1,48 +1,88 @@
-import numpy as np
 import pandas as pd
+import numpy as np
 
-# Load dataset
-df = pd.read_csv("Question2_Dataset[1].csv")
+df = pd.read_csv("Question3_Final_CP 17.csv")
 
-# Select input features and output
-df_features = df[['X1', 'X2', 'X1^2', 'X1^3', 'X2^2', 'X2^3', 'X1*X2', 'X1^2*X2']]
-Y = df['Y'].values.reshape(-1, 1)
+X_features = df[['X1', 'X2', 'X3']].values
+y = df[['Y']].values
+m = X_features.shape[0]
 
-# Normalize features (Z-score normalization)
-X_norm = (df_features - df_features.mean()) / df_features.std()
+means = X_features.mean(axis=0)
+stds = X_features.std(axis=0)
+X_norm = (X_features - means) / stds
 
-# Add bias term (column of ones)
-X = np.c_[np.ones(X_norm.shape[0]), X_norm]
+X = np.hstack([np.ones((m, 1)), X_norm])
 
-# Initialize theta to zeros
-theta = np.zeros((X.shape[1], 1))
 
-# Gradient Descent Function
-def gradient_descent(X, Y, theta, alpha, iterations):
-    m = len(Y)
-    J_history = []
+def sigmoid(z):
+    return 1 / (1 + np.exp(-z))
+
+
+def computeCostReg(X, y, theta, lambd):
+    m = X.shape[0]
+    h = sigmoid(X @ theta)
+    term1 = -y * np.log(h + 1e-15)
+    term2 = -(1 - y) * np.log(1 - h + 1e-15)
+    unreg_cost = (1 / m) * np.sum(term1 + term2)
+
+    reg_term = (lambd / (2 * m)) * np.sum(theta[1:] ** 2)
+
+    return unreg_cost + reg_term
+
+
+def gradientReg(X, y, theta, lambd):
+    m = X.shape[0]
+    h = sigmoid(X @ theta)
+    error = h - y
+
+    grad = (1 / m) * (X.T @ error)
+
+    grad[1:] = grad[1:] + (lambd / m) * theta[1:]
+
+    return grad
+
+
+def gradientDescentReg(X, y, alpha, lambd, iterations):
+    m, n = X.shape
+    theta = np.zeros((n, 1))
+    cost_history = []
+
     for _ in range(iterations):
-        predictions = X.dot(theta)
-        errors = predictions - Y
-        gradient = (1/m) * X.T.dot(errors)
-        theta -= alpha * gradient
-        cost = (1/(2*m)) * np.sum(errors**2)
-        J_history.append(cost)
-    return theta, J_history
+        cost = computeCostReg(X, y, theta, lambd)
+        cost_history.append(cost)
 
-# Run gradient descent for different iteration values
-iterations_list = [10, 100, 1000]
-alpha = 0.1
-results = {}
+        grad = gradientReg(X, y, theta, lambd)
+        theta = theta - alpha * grad
 
-for num_iter in iterations_list:
-    theta_opt, J_hist = gradient_descent(X, Y, np.zeros((X.shape[1], 1)), alpha, num_iter)
-    results[num_iter] = {
-        "cost_function": int(round(J_hist[-1])),
-        "max_theta": int(round(np.max(np.abs(theta_opt))))
-    }
+    return theta, cost_history
 
-# Print results
-print("#Iterations\tCost Function\tOptimal Theta")
-for num_iter, values in results.items():
-    print(f"n={num_iter}\t{values['cost_function']}\t{values['max_theta']}")
+
+scenarios = [
+    (100, 1.0, 1.0),
+    (1000, 1.0, 10.0),
+    (10000, 2.0, 5.0)
+]
+
+for (iters, alpha, lambd) in scenarios:
+    theta_final, cost_hist = gradientDescentReg(X, y, alpha, lambd, iters)
+    final_cost = cost_hist[-1]
+    max_theta = np.max(np.abs(theta_final))
+
+    final_cost_2dec = round(final_cost, 2)
+    max_theta_2dec = round(max_theta, 2)
+
+    print(f"After {iters} iterations, alpha={alpha}, lambda={lambd}:")
+    print(f"  Cost function (2 decimals)   = {final_cost_2dec}")
+    print(f"  Max |theta| (2 decimals)     = {max_theta_2dec}")
+    print("------------------------------------------------------")
+
+iters, alpha, lambd = 10000, 2.0, 5.0
+theta_final_10000, cost_hist_10000 = gradientDescentReg(X, y, alpha, lambd, iters)
+
+X_first10 = X[:10, :]
+h_first10 = sigmoid(X_first10 @ theta_final_10000)
+
+predictions_first10 = (h_first10 >= 0.5).astype(int)
+num_zeros_first10 = np.sum(predictions_first10 == 0)
+
+print(f"Number of '0' predictions in the first 10 rows = {num_zeros_first10}")
