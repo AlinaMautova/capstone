@@ -1,4 +1,19 @@
 # capstone
+9. Варианты ответов
+Bottom-Up testing
+Stability testing
+Performance testing
+Regression testing
+Top-Down testing
+Integration testing
+Functional Testing
+
+Test A: Integration testing
+Test B: Functional Testing
+Test C: Performance testing
+Test D: Regression testing
+
+с 1 до 4 вопросов одинаково все
 
 ДАТАСЕТЫ ОДИНАКОВВЫЕ, БЕРИ ЭТИ ОТВЕТЫ
 
